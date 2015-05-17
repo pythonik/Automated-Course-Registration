@@ -8,12 +8,12 @@ USER_CREDENTIAL = {
 	'id': "",
 	'pin': ""
 }
-TERM = "Summer 2015"
-SUBJECT = "Computer Science"
-COURSE = "2080"
-SECTION = ""
-TARGET = ""
 
+TERM = ""    # eg. Summer 2015
+SUBJECT = "" # eg. Computer Science
+COURSE = ""  # eg. 2080
+SECTION = "A01"
+TARGET = ""  # login page of aurora student
 
 def select_term(driver):
 	term_select_elem = driver.find_element_by_id("term_input_id")
@@ -40,8 +40,6 @@ def select_course(driver):
 				btn.click()
 				break
 
-
-
 def automation(driver):
 	driver.get(TARGET)
 	username = driver.find_element_by_id("UserID")
@@ -62,7 +60,7 @@ def automation(driver):
 	select_term(driver)
 	select_subject(driver)
 	select_course(driver)
-	#driver.close()
+	driver.close()
 
 if __name__ == '__main__':
 	driver = webdriver.Firefox()
