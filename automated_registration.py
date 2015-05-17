@@ -10,9 +10,9 @@ USER_CREDENTIAL = {
 }
 TERM = "Summer 2015"
 SUBJECT = "Computer Science"
-COURSE = ""
+COURSE = "2080"
 SECTION = ""
-TARGET = "https://aurora.umanitoba.ca/banprod/twbkwbis.P_WWWLogin"
+TARGET = ""
 
 
 def select_term(driver):
@@ -26,6 +26,19 @@ def select_subject(driver):
 	Select(term_select_elem).select_by_visible_text(SUBJECT)
 	search = driver.find_element_by_xpath("//input[@value='Course Search']")
 	search.click()
+
+def select_course(driver):
+	courses = driver.find_elements_by_tag_name("tr")
+	found = False
+	for course in courses:
+		if found:
+			break
+		for elem in course.find_elements_by_tag_name('td'):
+			if elem.text == COURSE:
+				found = True
+				btn = course.find_element_by_xpath("//input[@value='View Sections']")
+				btn.click()
+				break
 
 
 
@@ -48,6 +61,7 @@ def automation(driver):
 	lookup.perform()
 	select_term(driver)
 	select_subject(driver)
+	select_course(driver)
 	#driver.close()
 
 if __name__ == '__main__':
